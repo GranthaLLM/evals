@@ -1,29 +1,39 @@
-# HF router model ids take a ":provider" suffix. Keys come from the env var first, then the file.
+# Keys come from the env var named here, then the key file.
 
 [defaults]
-base_url = "https://router.huggingface.co/v1"
-key_env = "HF_TOKEN"
-key_file = "~/.cache/huggingface/token"
+base_url = "https://openrouter.ai/api/v1"
+key_env = "OPENROUTER_API_KEY"
+key_file = "~/.openrouter_key"
 
 [[model]]
 name = "gemma-4-31b"
-id = "google/gemma-4-31B-it:deepinfra"
+id = "google/gemma-4-31b-it"
 
 [[model]]
 name = "gemma-3-27b"
-id = "google/gemma-3-27b-it:deepinfra"
+id = "google/gemma-3-27b-it"
 
 [[model]]
 name = "qwen3-32b"
-id = "Qwen/Qwen3-32B:groq"
+id = "qwen/qwen3-32b"
+extra = { reasoning = { enabled = false } }
 
 [[model]]
 name = "qwen3.5-9b"
-id = "Qwen/Qwen3.5-9B:together"
+id = "qwen/qwen3.5-9b"
+extra = { reasoning = { enabled = false } }
+
+# Sarvam-M's base model; Sarvam-M itself is not on OpenRouter
+[[model]]
+name = "mistral-small-3.2"
+id = "mistralai/mistral-small-3.2-24b-instruct"
 
 [[model]]
 name = "sarvam-m"
 id = "sarvamai/sarvam-m:featherless-ai"
+base_url = "https://router.huggingface.co/v1"
+key_env = "HF_TOKEN"
+key_file = "~/.cache/huggingface/token"
 
 [[model]]
 name = "bodhan"
