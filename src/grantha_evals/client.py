@@ -21,12 +21,19 @@ def _cache_path(key_material):
 def _post(model, path, body):
     delay = 2.0
     for attempt in range(RETRIES):
-        r = httpx.post(
-            model.base_url + path,
-            json=body,
-            headers={"Authorization": f"Bearer {model.key}"},
-            timeout=180,
-        )
+        try:
+            r = httpx.post(
+                model.base_url + path,
+                json=body,
+                headers={"Authorization": f"Bearer {model.key}"},
+                timeout=300,
+            )
+        except httpx.TransportError:
+            if attempt == RETRIES - 1:
+                raise
+            time.sleep(delay)
+            delay = min(delay * 2, 60)
+            continue
         if r.status_code == 200:
             return r.json()
         retryable = r.status_code in (408, 429) or r.status_code >= 500
