@@ -1,0 +1,36 @@
+# HF router model ids take a ":provider" suffix. Keys come from the env var first, then the file.
+
+[defaults]
+base_url = "https://router.huggingface.co/v1"
+key_env = "HF_TOKEN"
+key_file = "~/.cache/huggingface/token"
+
+[[model]]
+name = "gemma-4-31b"
+id = "google/gemma-4-31B-it:deepinfra"
+
+[[model]]
+name = "gemma-3-27b"
+id = "google/gemma-3-27b-it:deepinfra"
+
+[[model]]
+name = "qwen3-32b"
+id = "Qwen/Qwen3-32B:groq"
+
+[[model]]
+name = "qwen3.5-9b"
+id = "Qwen/Qwen3.5-9B:together"
+
+[[model]]
+name = "sarvam-m"
+id = "sarvamai/sarvam-m:featherless-ai"
+
+[[model]]
+name = "bodhan"
+id = "indic-translate"
+base_url = "https://api.bodhan.ai/v1"
+key_env = "BODHAN_API_KEY"
+key_file = "~/.bodhan_key_translate"
+# server pins greedy decoding and rejects temperature and max_tokens
+pinned = true
+extra = { source_language_code = "sa", target_language_code = "en" }

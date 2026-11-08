@@ -1,0 +1,25 @@
+[project]
+name = "grantha-evals"
+version = "0.1.0"
+description = "Open-model evals on the Grantha Sanskrit corpus"
+requires-python = ">=3.11"
+dependencies = [
+  "httpx>=0.27",
+  "sacrebleu>=2.4",
+  "pandas>=2.2",
+  "xlrd>=2.0",
+  "pyarrow>=16",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+grantha-evals = "grantha_evals.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/grantha_evals"]
