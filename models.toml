@@ -69,3 +69,5 @@ base_url = "https://api.groq.com/openai/v1"
 key_env = "GROQ_API_KEY"
 key_file = "~/.groq_key"
 extra = { reasoning_effort = "low" }
+# reasoning tokens count against max_tokens and starve short answers
+min_tokens = 600
