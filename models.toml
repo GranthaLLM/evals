@@ -14,9 +14,12 @@ name = "gemma-3-27b"
 id = "google/gemma-3-27b-it"
 
 [[model]]
-name = "qwen3-32b"
-id = "qwen/qwen3-32b"
-extra = { reasoning = { enabled = false } }
+name = "qwen3.8-27b"
+id = "qwen/qwen3.8-27b"
+base_url = "https://api.groq.com/openai/v1"
+key_env = "GROQ_API_KEY"
+key_file = "~/.groq_key"
+extra = { reasoning_effort = "none" }
 
 [[model]]
 name = "qwen3.5-9b"
@@ -44,3 +47,11 @@ key_file = "~/.bodhan_key_translate"
 # server pins greedy decoding and rejects temperature and max_tokens
 pinned = true
 extra = { source_language_code = "sa", target_language_code = "en" }
+
+[[model]]
+name = "gpt-oss-120b"
+id = "openai/gpt-oss-120b"
+base_url = "https://api.groq.com/openai/v1"
+key_env = "GROQ_API_KEY"
+key_file = "~/.groq_key"
+extra = { reasoning_effort = "low" }
