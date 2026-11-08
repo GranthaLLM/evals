@@ -18,8 +18,18 @@ MAX_CHARS = 600
 INSTRUCTION = "Translate the following Sanskrit text into English. Output only the translation.\n\n"
 
 
+PILOT_SIZE = 10
+
+
+def _prefix_stable(pool, n, seed):
+    """The first PILOT_SIZE units are the original pilot sample; larger n only appends, so cached responses stay valid."""
+    head = random.Random(seed).sample(pool, min(PILOT_SIZE, len(pool)))
+    rest = [u for u in pool if u not in head]
+    random.Random(seed + 1).shuffle(rest)
+    return (head + rest)[:n]
+
+
 def select(corpus_dir, works, per_work, seed=0):
-    rng = random.Random(seed)
     items = []
     for w in works:
         name = w.split("/")[-1]
@@ -31,7 +41,7 @@ def select(corpus_dir, works, per_work, seed=0):
             and 10 < len(u["sanskrit"]) <= MAX_CHARS
             and "-" not in u["ref"]
         ]
-        for u in rng.sample(pool, min(per_work, len(pool))):
+        for u in _prefix_stable(pool, per_work, seed):
             items.append({"id": f"{name}:{u['ref']}", "work": name, "sanskrit": u["sanskrit"], "english": u["english"].strip()})
     return items
 
