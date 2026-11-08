@@ -8,7 +8,7 @@ import httpx
 from .models import ROOT, Model
 
 CACHE = ROOT / "cache"
-THINK = re.compile(r"<think>.*?</think>", re.S)
+THINK = re.compile(r"<(think|thought)>.*?</\1>", re.S)
 RETRIES = 40
 RETRY_AFTER = re.compile(r"try again in ([\d.]+)s")
 
@@ -39,7 +39,7 @@ def _post(model, path, body):
 
 def complete(model: Model, messages, max_tokens=1024):
     """Greedy completion, cached on disk by request so reruns cost nothing."""
-    sampling = {} if model.pinned else {"temperature": 0, "max_tokens": max_tokens}
+    sampling = {} if model.pinned else {"temperature": 0, "max_tokens": max(max_tokens, model.min_tokens)}
     req = {"model": model.id, "messages": messages, **sampling, **model.extra}
     path = "/chat/completions"
     cp = _cache_path([model.base_url, path, req])

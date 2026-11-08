@@ -14,6 +14,7 @@ class Model:
     key: str
     extra: dict = field(default_factory=dict)
     pinned: bool = False
+    min_tokens: int = 0
 
 
 def _key(env, file):
@@ -37,6 +38,7 @@ def load(name, config=ROOT / "models.toml"):
                 key=_key(merged["key_env"], merged["key_file"]),
                 extra=merged.get("extra", {}),
                 pinned=merged.get("pinned", False),
+                min_tokens=merged.get("min_tokens", 0),
             )
     raise SystemExit(f"unknown model {name!r}, known: {[m['name'] for m in cfg['model']]}")
 

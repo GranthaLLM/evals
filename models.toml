@@ -7,7 +7,21 @@ key_file = "~/.openrouter_key"
 
 [[model]]
 name = "gemma-4-31b"
-id = "google/gemma-4-31b-it"
+id = "gemma-4-31b-it"
+base_url = "https://generativelanguage.googleapis.com/v1beta/openai"
+key_env = "GOOGLE_API_KEY"
+key_file = "~/.google_key"
+# Gemma 4 emits its reasoning inline, so the budget must cover it
+min_tokens = 4000
+
+[[model]]
+name = "gemma-4-26b"
+id = "gemma-4-26b-a4b-it"
+base_url = "https://generativelanguage.googleapis.com/v1beta/openai"
+key_env = "GOOGLE_API_KEY"
+key_file = "~/.google_key"
+# Gemma 4 emits its reasoning inline, so the budget must cover it
+min_tokens = 4000
 
 [[model]]
 name = "gemma-3-27b"

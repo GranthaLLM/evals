@@ -1,0 +1,19 @@
+{
+ "model": "gpt-oss-120b",
+ "per_work": 10,
+ "chrf++": 27.9,
+ "chrf": 30.04,
+ "signature": "nrefs:1|case:mixed|eff:yes|nc:6|nw:2|space:no|version:2.6.0",
+ "n": 90,
+ "by_work": {
+  "kumarasambhava": 29.54,
+  "samkhyakarika": 27.48,
+  "sanatsujatiya": 15.37,
+  "sarvadarshanasamgraha": 30.8,
+  "shatakatraya": 28.24,
+  "tarkasamgraha": 35.17,
+  "vidura_niti": 27.71,
+  "vimshatika_trimshika": 24.38,
+  "yaksha_prashna": 21.0
+ }
+}

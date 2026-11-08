@@ -1,0 +1,19 @@
+{
+ "model": "bodhan",
+ "per_work": 10,
+ "chrf++": 26.55,
+ "chrf": 28.43,
+ "signature": "nrefs:1|case:mixed|eff:yes|nc:6|nw:2|space:no|version:2.6.0",
+ "n": 90,
+ "by_work": {
+  "kumarasambhava": 27.02,
+  "samkhyakarika": 30.1,
+  "sanatsujatiya": 15.7,
+  "sarvadarshanasamgraha": 26.77,
+  "shatakatraya": 26.34,
+  "tarkasamgraha": 35.14,
+  "vidura_niti": 28.41,
+  "vimshatika_trimshika": 22.18,
+  "yaksha_prashna": 18.61
+ }
+}
