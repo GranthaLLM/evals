@@ -1,0 +1,83 @@
+{
+ "n": 90,
+ "models": {
+  "gemma-4-31b": {
+   "chrf++": 30.88,
+   "ci95": [
+    28.21,
+    33.33
+   ]
+  },
+  "qwen3.8-27b": {
+   "chrf++": 29.81,
+   "ci95": [
+    27.52,
+    31.92
+   ]
+  },
+  "gpt-oss-120b": {
+   "chrf++": 27.9,
+   "ci95": [
+    25.73,
+    29.94
+   ]
+  },
+  "bodhan": {
+   "chrf++": 26.55,
+   "ci95": [
+    24.09,
+    28.85
+   ]
+  }
+ },
+ "pairwise": {
+  "gemma-4-31b - qwen3.8-27b": {
+   "diff": 1.07,
+   "ci95": [
+    -0.15,
+    2.21
+   ],
+   "separable": false
+  },
+  "gemma-4-31b - gpt-oss-120b": {
+   "diff": 2.98,
+   "ci95": [
+    1.53,
+    4.36
+   ],
+   "separable": true
+  },
+  "gpt-oss-120b - qwen3.8-27b": {
+   "diff": -1.91,
+   "ci95": [
+    -3.17,
+    -0.73
+   ],
+   "separable": true
+  },
+  "bodhan - gemma-4-31b": {
+   "diff": -4.32,
+   "ci95": [
+    -5.74,
+    -2.84
+   ],
+   "separable": true
+  },
+  "bodhan - qwen3.8-27b": {
+   "diff": -3.25,
+   "ci95": [
+    -4.66,
+    -1.75
+   ],
+   "separable": true
+  },
+  "bodhan - gpt-oss-120b": {
+   "diff": -1.34,
+   "ci95": [
+    -2.6,
+    -0.13
+   ],
+   "separable": true
+  }
+ }
+}

@@ -3,7 +3,7 @@ import json
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from . import metrics, models, sandhi, translate
+from . import metrics, models, report, sandhi, translate
 from .client import complete
 from .models import ROOT
 
@@ -59,6 +59,12 @@ def run_translate(a):
     print(json.dumps({k: summary[k] for k in ("chrf++", "chrf", "n")}), a.model)
 
 
+def run_report(a):
+    out = report.bootstrap(a.models, a.corpus)
+    (OUT / "translate_report.json").write_text(json.dumps(out, indent=1))
+    print(json.dumps(out, indent=1))
+
+
 def main():
     ap = argparse.ArgumentParser(prog="grantha-evals")
     sub = ap.add_subparsers(required=True)
@@ -75,5 +81,9 @@ def main():
     t.add_argument("--per-work", type=int, default=10)
     t.add_argument("--workers", type=int, default=8)
     t.set_defaults(fn=run_translate)
+    r = sub.add_parser("report")
+    r.add_argument("models", nargs="+", choices=models.names())
+    r.add_argument("--corpus", type=Path, default=DEFAULT_CORPUS)
+    r.set_defaults(fn=run_report)
     a = ap.parse_args()
     a.fn(a)

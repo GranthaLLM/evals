@@ -1,0 +1,19 @@
+{
+ "model": "gemma-4-31b",
+ "per_work": 10,
+ "chrf++": 30.88,
+ "chrf": 32.86,
+ "signature": "nrefs:1|case:mixed|eff:yes|nc:6|nw:2|space:no|version:2.6.0",
+ "n": 90,
+ "by_work": {
+  "kumarasambhava": 33.02,
+  "samkhyakarika": 29.95,
+  "sanatsujatiya": 18.86,
+  "sarvadarshanasamgraha": 32.59,
+  "shatakatraya": 28.72,
+  "tarkasamgraha": 42.04,
+  "vidura_niti": 29.36,
+  "vimshatika_trimshika": 27.23,
+  "yaksha_prashna": 23.25
+ }
+}
