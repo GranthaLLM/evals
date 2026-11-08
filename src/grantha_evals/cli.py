@@ -22,7 +22,7 @@ def run_sandhi(a):
     demos, test = sandhi.split_demos_and_test(sandhi.load(a.data), a.per_tag)
 
     def one(item):
-        reply = complete(model, sandhi.prompt(demos, item.word), max_tokens=128)
+        reply = complete(model, sandhi.prompt(demos, item.word), max_tokens=48)
         pred = sandhi.parse(reply)
         return {"tag": item.tag, "word": item.word, "gold": list(item.parts), "pred": list(pred), **sandhi.score_one(item, pred)}
 

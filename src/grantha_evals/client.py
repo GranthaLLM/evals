@@ -9,7 +9,8 @@ from .models import ROOT, Model
 
 CACHE = ROOT / "cache"
 THINK = re.compile(r"<think>.*?</think>", re.S)
-RETRIES = 6
+RETRIES = 40
+RETRY_AFTER = re.compile(r"try again in ([\d.]+)s")
 
 
 def _cache_path(key_material):
@@ -31,8 +32,9 @@ def _post(model, path, body):
         retryable = r.status_code in (408, 429) or r.status_code >= 500
         if not retryable or attempt == RETRIES - 1:
             raise RuntimeError(f"{model.name} HTTP {r.status_code}: {r.text[:300]}")
-        time.sleep(delay)
-        delay *= 2
+        hint = RETRY_AFTER.search(r.text)
+        time.sleep(float(hint.group(1)) + 1 if hint else delay)
+        delay = min(delay * 2, 60)
 
 
 def complete(model: Model, messages, max_tokens=1024):
