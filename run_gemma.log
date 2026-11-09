@@ -1,1 +1,2 @@
 {"chrf++": 30.88, "chrf": 32.86, "n": 90} gemma-4-31b
+{"n": 300, "exact": 0.44, "precision": 0.7603, "recall": 0.6612, "f1": 0.7073} gemma-4-31b
