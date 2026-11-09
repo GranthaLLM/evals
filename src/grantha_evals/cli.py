@@ -3,7 +3,7 @@ import json
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from . import metrics, models, report, sandhi, translate
+from . import judge, metrics, models, report, sandhi, similarity, translate
 from .client import cached, complete
 from .models import ROOT
 
@@ -73,6 +73,26 @@ def run_progress(a):
         print(f"{name}: {done}/{len(items)} ({100 * done // len(items)}%)")
 
 
+def run_similarity(a):
+    out = similarity.bootstrap(a.models, a.corpus, a.per_work)
+    (OUT / "similarity_report.json").write_text(json.dumps(out, indent=1))
+    print(json.dumps(out, indent=1))
+
+
+def run_judge(a):
+    model = models.load(a.model)
+    items = json.loads((a.items / "test_items.json").read_text())
+    key = json.loads((a.items / "test_key.json").read_text())
+    out = {"model": a.model}
+    for mode, flag in (("without_commentary", False), ("with_commentary", True)):
+        rows = _map(lambda it: judge.run(model, it, flag), items, a.workers)
+        out[mode] = judge.planted_check(rows, key)
+        (OUT / "raw").mkdir(parents=True, exist_ok=True)
+        (OUT / "raw" / f"judge_{a.model}_{mode}.json").write_text(json.dumps(rows, ensure_ascii=False))
+    (OUT / f"judge_{a.model}.json").write_text(json.dumps(out, indent=1))
+    print(json.dumps(out, indent=1))
+
+
 def main():
     ap = argparse.ArgumentParser(prog="grantha-evals")
     sub = ap.add_subparsers(required=True)
@@ -94,6 +114,16 @@ def main():
     r.add_argument("--corpus", type=Path, default=DEFAULT_CORPUS)
     r.add_argument("--per-work", type=int, default=150)
     r.set_defaults(fn=run_report)
+    q = sub.add_parser("similarity")
+    q.add_argument("models", nargs="+", choices=models.names())
+    q.add_argument("--corpus", type=Path, default=DEFAULT_CORPUS)
+    q.add_argument("--per-work", type=int, default=150)
+    q.set_defaults(fn=run_similarity)
+    j = sub.add_parser("judge")
+    j.add_argument("model", choices=models.names())
+    j.add_argument("--items", type=Path, default=ROOT.parent / "judge")
+    j.add_argument("--workers", type=int, default=2)
+    j.set_defaults(fn=run_judge)
     g = sub.add_parser("progress")
     g.add_argument("models", nargs="+", choices=models.names())
     g.add_argument("--corpus", type=Path, default=DEFAULT_CORPUS)

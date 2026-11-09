@@ -1,0 +1,30 @@
+{
+ "embedder": "BAAI/bge-base-en-v1.5",
+ "n": 1110,
+ "models": {
+  "gemma-4-31b": {
+   "cosine": 0.7448,
+   "ci95": [
+    0.7387,
+    0.7505
+   ]
+  },
+  "qwen3.8-27b": {
+   "cosine": 0.7337,
+   "ci95": [
+    0.7282,
+    0.7389
+   ]
+  }
+ },
+ "pairwise": {
+  "gemma-4-31b - qwen3.8-27b": {
+   "diff": 0.0111,
+   "ci95": [
+    0.0072,
+    0.0155
+   ],
+   "separable": true
+  }
+ }
+}
