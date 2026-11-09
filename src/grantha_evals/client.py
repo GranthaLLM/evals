@@ -53,7 +53,9 @@ def complete(model: Model, messages, max_tokens=1024):
     if cp.exists():
         return json.loads(cp.read_text())["text"]
     data = _post(model, path, req)
-    out = THINK.sub("", data["choices"][0]["message"]["content"] or "").strip()
+    out = THINK.sub("", data["choices"][0]["message"].get("content") or "").strip()
+    if not out:
+        return out
     cp.parent.mkdir(parents=True, exist_ok=True)
     cp.write_text(json.dumps({"text": out}, ensure_ascii=False))
     return out
