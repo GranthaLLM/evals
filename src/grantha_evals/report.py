@@ -4,7 +4,8 @@ import random
 
 from sacrebleu.metrics import CHRF
 
-from . import translate
+from . import models, translate
+from .client import cached
 from .models import ROOT
 
 RESAMPLES = 1000
@@ -20,14 +21,21 @@ def _score(metric, stats, idx):
     return metric._compute_score_from_stats(total).score
 
 
-def load(model, corpus):
-    refs = {i["id"]: i["english"] for i in translate.select(corpus, translate.PILOT_WORKS, 10**6)}
-    rows = [json.loads(line) for line in (RAW / f"translate_{model}.jsonl").read_text().splitlines()]
-    return {r["id"]: (r["hyp"], refs[r["id"]]) for r in rows}
+def load(model, corpus, per_work):
+    """Replies from the response cache, so a partial run can be reported while it is still going."""
+    m = models.load(model)
+    pool = translate.select(corpus, translate.PILOT_WORKS, per_work)
+    out = {}
+    for item in pool:
+        hyp = cached(m, translate.prompt(item["sanskrit"]))
+        if hyp is not None:
+            out[item["id"]] = (hyp, item["english"])
+    return out
 
 
-def bootstrap(models, corpus, seed=0):
-    data = {m: load(m, corpus) for m in models}
+def bootstrap(names, corpus, per_work, seed=0):
+    models = names
+    data = {m: load(m, corpus, per_work) for m in models}
     ids = sorted(set.intersection(*(set(d) for d in data.values())))
     metric = CHRF(word_order=2)
     stats = {m: _stats([data[m][i][0] for i in ids], [data[m][i][1] for i in ids]) for m in models}

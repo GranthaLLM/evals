@@ -4,7 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from . import metrics, models, report, sandhi, translate
-from .client import _cache_path, complete
+from .client import cached, complete
 from .models import ROOT
 
 DEFAULT_CORPUS = ROOT.parent / "corpus"
@@ -60,7 +60,7 @@ def run_translate(a):
 
 
 def run_report(a):
-    out = report.bootstrap(a.models, a.corpus)
+    out = report.bootstrap(a.models, a.corpus, a.per_work)
     (OUT / "translate_report.json").write_text(json.dumps(out, indent=1))
     print(json.dumps(out, indent=1))
 
@@ -69,11 +69,7 @@ def run_progress(a):
     items = translate.select(a.corpus, translate.PILOT_WORKS, a.per_work)
     for name in a.models:
         m = models.load(name)
-        sampling = {} if m.pinned else {"temperature": 0, "max_tokens": max(1024, m.min_tokens)}
-        done = sum(
-            _cache_path([m.base_url, "/chat/completions", {"model": m.id, "messages": translate.prompt(i["sanskrit"]), **sampling, **m.extra}]).exists()
-            for i in items
-        )
+        done = sum(cached(m, translate.prompt(i["sanskrit"])) is not None for i in items)
         print(f"{name}: {done}/{len(items)} ({100 * done // len(items)}%)")
 
 
@@ -96,6 +92,7 @@ def main():
     r = sub.add_parser("report")
     r.add_argument("models", nargs="+", choices=models.names())
     r.add_argument("--corpus", type=Path, default=DEFAULT_CORPUS)
+    r.add_argument("--per-work", type=int, default=150)
     r.set_defaults(fn=run_report)
     g = sub.add_parser("progress")
     g.add_argument("models", nargs="+", choices=models.names())

@@ -44,10 +44,20 @@ def _post(model, path, body):
         delay = min(delay * 2, 60)
 
 
+def _request(model: Model, messages, max_tokens):
+    sampling = {} if model.pinned else {"temperature": 0, "max_tokens": max(max_tokens, model.min_tokens)}
+    return {"model": model.id, "messages": messages, **sampling, **model.extra}
+
+
+def cached(model: Model, messages, max_tokens=1024):
+    """The stored reply for this request, or None if it was never completed."""
+    cp = _cache_path([model.base_url, "/chat/completions", _request(model, messages, max_tokens)])
+    return json.loads(cp.read_text())["text"] if cp.exists() else None
+
+
 def complete(model: Model, messages, max_tokens=1024):
     """Greedy completion, cached on disk by request so reruns cost nothing."""
-    sampling = {} if model.pinned else {"temperature": 0, "max_tokens": max(max_tokens, model.min_tokens)}
-    req = {"model": model.id, "messages": messages, **sampling, **model.extra}
+    req = _request(model, messages, max_tokens)
     path = "/chat/completions"
     cp = _cache_path([model.base_url, path, req])
     if cp.exists():
