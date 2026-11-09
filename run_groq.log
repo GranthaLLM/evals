@@ -1,4 +1,0 @@
-{"chrf++": 29.81, "chrf": 31.65, "n": 90} qwen3.8-27b
-{"n": 600, "exact": 0.33, "precision": 0.6652, "recall": 0.7197, "f1": 0.6913} qwen3.8-27b
-{"chrf++": 27.9, "chrf": 30.04, "n": 90} gpt-oss-120b
-{"n": 600, "exact": 0.01, "precision": 0.7778, "recall": 0.0115, "f1": 0.0226} gpt-oss-120b
