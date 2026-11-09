@@ -23,3 +23,9 @@ Sandhi needs SandhiKosh (research use only, not redistributed here): `--data` de
 - chrF++ is sacreBLEU `word_order=2`; the signature is written next to every score.
 - Sandhi reports exact component match and boundary F1 (a boundary counts within one letter, as in the tokenizer eval). Five fixed few-shot demos come from the UoH sheet and are excluded from scoring.
 - The English reference is one translator's rendering, not gold. Read scores against the human-human ceiling, not against 100.
+
+## Results so far
+
+![chrF++ by model](results/chrf_ci.svg)
+
+Gemma-4-31B 30.21 against Qwen3.8-27B 29.12 on 1,112 shared verses (paired difference +1.09, 95% CI +0.76 to +1.43). gpt-oss-120b and Bodhan were run on a 90-verse pilot only. Sandhi, similarity and judge summaries are in `results/`.
