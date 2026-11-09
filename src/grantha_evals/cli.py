@@ -93,6 +93,24 @@ def run_judge(a):
     print(json.dumps(out, indent=1))
 
 
+def run_judge_candidates(a):
+    judge_model = models.load(a.judge)
+    pilot = json.loads((a.items / "pilot_bsb_madhva.json").read_text())
+    items = judge.candidate_items(pilot, a.n)
+    out = {"judge": a.judge, "n": len(items)}
+    for cand in a.candidates:
+        cm = models.load(cand)
+        hyps = _map(lambda it: complete(cm, translate.prompt(it["sanskrit"]), max_tokens=1500), items, a.workers)
+        scored = {}
+        for mode, flag in (("without_commentary", False), ("with_commentary", True)):
+            rows = _map(lambda p: judge.run(judge_model, {**p[0], "english": p[1]}, flag), list(zip(items, hyps)), a.workers)
+            pens = [r["penalty"] for r in rows if r["penalty"] is not None]
+            scored[mode] = {"mean_penalty": round(sum(pens) / max(len(pens), 1), 2), "scored": len(pens), "per_item": {r["id"]: r["penalty"] for r in rows}}
+        out[cand] = scored
+        print(cand, {m: scored[m]["mean_penalty"] for m in scored}, flush=True)
+    (OUT / f"judge_candidates_{a.judge}.json").write_text(json.dumps(out, indent=1))
+
+
 def main():
     ap = argparse.ArgumentParser(prog="grantha-evals")
     sub = ap.add_subparsers(required=True)
@@ -124,6 +142,13 @@ def main():
     j.add_argument("--items", type=Path, default=ROOT.parent / "judge")
     j.add_argument("--workers", type=int, default=2)
     j.set_defaults(fn=run_judge)
+    c = sub.add_parser("judge-candidates")
+    c.add_argument("judge", choices=models.names())
+    c.add_argument("candidates", nargs="+", choices=models.names())
+    c.add_argument("--n", type=int, default=30)
+    c.add_argument("--items", type=Path, default=ROOT.parent / "judge")
+    c.add_argument("--workers", type=int, default=2)
+    c.set_defaults(fn=run_judge_candidates)
     g = sub.add_parser("progress")
     g.add_argument("models", nargs="+", choices=models.names())
     g.add_argument("--corpus", type=Path, default=DEFAULT_CORPUS)

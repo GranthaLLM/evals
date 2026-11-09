@@ -6,12 +6,12 @@ from .client import complete
 
 WEIGHTS = {"minor": 1, "major": 5, "critical": 25}
 CATEGORIES = "accuracy, omission, addition, terminology, fluency, other"
-COMMENTARY_CHARS = 14000
+COMMENTARY_CHARS = 8000
 SYSTEM = (
     "You are a strict annotator of Sanskrit to English translation quality, following the MQM framework. "
     "Find every error in the English translation of the Sanskrit source. For each error give the offending English span, "
     f"a category ({CATEGORIES}), and a severity: minor (small flaw), major (changes or loses meaning), "
-    "critical (wrong or unrelated content, or most of the passage missing). "
+    "critical (wrong or unrelated content, or a substantial part of the source left untranslated; omission of that kind is always critical). "
     'Reply with JSON only: {"errors": [{"span": "...", "category": "...", "severity": "..."}]}. '
     'If the translation is correct reply {"errors": []}.'
 )
@@ -61,3 +61,14 @@ def planted_check(rows, key):
         "auc": round(wins / max(len(clean) * len(bad), 1), 3),
         "unparsed": sum(r["penalty"] is None for r in rows),
     }
+
+
+def candidate_items(pilot, n, seed=0):
+    """Pilot sutras that carry commentary and a short enough source to translate in one call."""
+    import random
+
+    pool = [
+        u for u in pilot
+        if u["ref"][0].isdigit() and 200 < len(u["sanskrit"]) < 1500 and 1500 < len(u["dipika_iast"]) < 9000
+    ]
+    return [{**u, "id": u["ref"]} for u in random.Random(seed).sample(pool, min(n, len(pool)))]
