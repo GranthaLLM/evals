@@ -4,3 +4,4 @@ __pycache__/
 cache/
 data/
 results/raw/
+run*.log

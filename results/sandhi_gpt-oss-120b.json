@@ -1,0 +1,54 @@
+{
+ "model": "gpt-oss-120b",
+ "shots": 5,
+ "per_tag": 100,
+ "all": {
+  "n": 600,
+  "exact": 0.2,
+  "precision": 0.5559,
+  "recall": 0.6525,
+  "f1": 0.6003
+ },
+ "ashtadhyayi": {
+  "n": 100,
+  "exact": 0.11,
+  "precision": 0.3676,
+  "recall": 0.5,
+  "f1": 0.4237
+ },
+ "external": {
+  "n": 100,
+  "exact": 0.11,
+  "precision": 0.6857,
+  "recall": 0.7273,
+  "f1": 0.7059
+ },
+ "gita": {
+  "n": 100,
+  "exact": 0.31,
+  "precision": 0.5401,
+  "recall": 0.6981,
+  "f1": 0.6091
+ },
+ "internal": {
+  "n": 100,
+  "exact": 0.09,
+  "precision": 0.5938,
+  "recall": 0.57,
+  "f1": 0.5816
+ },
+ "literature": {
+  "n": 100,
+  "exact": 0.18,
+  "precision": 0.4672,
+  "recall": 0.6337,
+  "f1": 0.5378
+ },
+ "uoh": {
+  "n": 100,
+  "exact": 0.4,
+  "precision": 0.7714,
+  "recall": 0.7788,
+  "f1": 0.7751
+ }
+}

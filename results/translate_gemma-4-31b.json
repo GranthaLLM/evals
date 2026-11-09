@@ -1,19 +1,19 @@
 {
  "model": "gemma-4-31b",
- "per_work": 10,
- "chrf++": 30.88,
- "chrf": 32.86,
+ "per_work": 150,
+ "chrf++": 30.2,
+ "chrf": 32.19,
  "signature": "nrefs:1|case:mixed|eff:yes|nc:6|nw:2|space:no|version:2.6.0",
- "n": 90,
+ "n": 1221,
  "by_work": {
-  "kumarasambhava": 33.02,
-  "samkhyakarika": 29.95,
-  "sanatsujatiya": 18.86,
-  "sarvadarshanasamgraha": 32.59,
-  "shatakatraya": 28.72,
-  "tarkasamgraha": 42.04,
-  "vidura_niti": 29.36,
-  "vimshatika_trimshika": 27.23,
-  "yaksha_prashna": 23.25
+  "kumarasambhava": 32.18,
+  "samkhyakarika": 38.34,
+  "sanatsujatiya": 19.08,
+  "sarvadarshanasamgraha": 30.46,
+  "shatakatraya": 32.39,
+  "tarkasamgraha": 34.58,
+  "vidura_niti": 26.71,
+  "vimshatika_trimshika": 30.86,
+  "yaksha_prashna": 20.13
  }
 }

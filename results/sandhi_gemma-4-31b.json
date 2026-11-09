@@ -1,0 +1,54 @@
+{
+ "model": "gemma-4-31b",
+ "shots": 5,
+ "per_tag": 50,
+ "all": {
+  "n": 300,
+  "exact": 0.44,
+  "precision": 0.7603,
+  "recall": 0.6612,
+  "f1": 0.7073
+ },
+ "ashtadhyayi": {
+  "n": 50,
+  "exact": 0.2,
+  "precision": 0.5778,
+  "recall": 0.5098,
+  "f1": 0.5417
+ },
+ "external": {
+  "n": 50,
+  "exact": 0.4,
+  "precision": 0.7838,
+  "recall": 0.5918,
+  "f1": 0.6744
+ },
+ "gita": {
+  "n": 50,
+  "exact": 0.62,
+  "precision": 0.7679,
+  "recall": 0.7963,
+  "f1": 0.7818
+ },
+ "internal": {
+  "n": 50,
+  "exact": 0.22,
+  "precision": 0.8571,
+  "recall": 0.36,
+  "f1": 0.507
+ },
+ "literature": {
+  "n": 50,
+  "exact": 0.4,
+  "precision": 0.6842,
+  "recall": 0.7647,
+  "f1": 0.7222
+ },
+ "uoh": {
+  "n": 50,
+  "exact": 0.8,
+  "precision": 0.9412,
+  "recall": 0.9231,
+  "f1": 0.932
+ }
+}
