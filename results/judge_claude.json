@@ -1,0 +1,18 @@
+{
+ "with": {
+  "n_clean": 5,
+  "n_planted": 9,
+  "mean_penalty_clean": 4.8,
+  "mean_penalty_planted": 29.0,
+  "auc": 0.8,
+  "unparsed": 0
+ },
+ "without": {
+  "n_clean": 5,
+  "n_planted": 9,
+  "mean_penalty_clean": 9.0,
+  "mean_penalty_planted": 17.78,
+  "auc": 0.667,
+  "unparsed": 0
+ }
+}
