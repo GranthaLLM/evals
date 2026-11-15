@@ -26,6 +26,6 @@ Sandhi needs SandhiKosh (research use only, not redistributed here): `--data` de
 
 ## Results so far
 
-![chrF++ by model](results/chrf_ci.svg)
+![Gemma-4-31B vs Qwen3.8-27B](results/gemma_vs_qwen.svg)
 
 Gemma-4-31B 30.21 against Qwen3.8-27B 29.12 on 1,112 shared verses (paired difference +1.09, 95% CI +0.76 to +1.43). gpt-oss-120b and Bodhan were run on a 90-verse pilot only. Sandhi, similarity and judge summaries are in `results/`.

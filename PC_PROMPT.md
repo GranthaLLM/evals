@@ -25,6 +25,8 @@ pip install -U vllm
 vllm serve buddhist-nlp/mitra-qwen35-translate --dtype bfloat16 --max-model-len 4096 --port 8000
 ```
 
+The repo is public and ungated, no token needed. If an expired Hugging Face token is cached, it makes the lookup fail with "not a valid model identifier". Run the server with `HF_HUB_DISABLE_IMPLICIT_TOKEN=1` and no `HF_TOKEN` set, or run `hf auth logout` first. Do not read or print the cached token.
+
 Run it in tmux. About 18 GB of weights, fits the 3090. Qwen3.5 needs a recent vllm; if loading fails, upgrade vllm and transformers. Wait for the "Application startup complete" line.
 
 `models.toml` already has the entry `mitra-qwen-9b` pointing at `http://localhost:8000/v1`. Set a dummy key in the eval shell: `export LOCAL_KEY=x`.
