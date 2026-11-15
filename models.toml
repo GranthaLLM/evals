@@ -71,3 +71,12 @@ key_file = "~/.groq_key"
 extra = { reasoning_effort = "low" }
 # reasoning tokens count against max_tokens and starve short answers
 min_tokens = 600
+
+# served by vllm on the 3090, reached through ssh -L 8000:localhost:8000 <pc>
+[[model]]
+name = "mitra-qwen-9b"
+id = "buddhist-nlp/mitra-qwen35-translate"
+base_url = "http://localhost:8000/v1"
+key_env = "LOCAL_KEY"
+key_file = "~/.local_key"
+extra = { chat_template_kwargs = { enable_thinking = false } }
