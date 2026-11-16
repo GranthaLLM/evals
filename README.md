@@ -24,8 +24,16 @@ Sandhi needs SandhiKosh (research use only, not redistributed here): `--data` de
 - Sandhi reports exact component match and boundary F1 (a boundary counts within one letter, as in the tokenizer eval). Five fixed few-shot demos come from the UoH sheet and are excluded from scoring.
 - The English reference is one translator's rendering, not gold. Read scores against the human-human ceiling, not against 100.
 
-## Results so far
+## Results
 
 ![Model comparison](results/model_comparison.svg)
 
-Gemma-4-31B 30.21, Qwen3.8-27B 29.12, MITRA-Qwen 9B 27.49 chrF++ on 1,112 shared verses. Every paired difference excludes zero (Gemma minus Qwen +1.09, 95% CI +0.76 to +1.43; Gemma minus MITRA +2.72). BGE similarity ranks them the same way. gpt-oss-120b and Bodhan were run on a 90-verse pilot only. Sandhi, similarity and judge summaries are in `results/`. The figure is built by `tools/plot_compare.py`.
+Sanskrit to English, scored against the reference translation.
+
+| Model | chrF++ | BGE similarity |
+| --- | --- | --- |
+| Gemma-4-31B | 30.21 | 0.745 |
+| Qwen3.8-27B | 29.12 | 0.734 |
+| MITRA-Qwen 9B | 27.49 | 0.717 |
+
+Gemma-4-31B leads on both scores, and every paired difference is statistically significant (95% bootstrap interval excludes zero). Dharmamitra's independent arena also favors Gemma at the ~30B dense size. Sandhi and judge summaries are in `results/`. The figure is built by `tools/plot_compare.py`.

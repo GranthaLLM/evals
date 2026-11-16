@@ -20,7 +20,7 @@ pairs = [("gemma-4-31b - qwen3.8-27b", "Gemma - Qwen3.8"), ("gemma-4-31b - mitra
 o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" font-family="Helvetica, Arial, sans-serif">',
      f'<rect width="{W}" height="{H}" fill="#ffffff"/>',
      f'<text x="24" y="28" font-size="16" font-weight="700" fill="{INK}">Gemma-4-31B leads on Sanskrit to English; MITRA-Qwen 9B trails both larger models</text>',
-     f'<text x="24" y="47" font-size="11.5" fill="{MUTED}">{tr["n"]:,} shared verses, 95% bootstrap interval. Higher is better. Every paired difference excludes zero.</text>']
+     f'<text x="24" y="47" font-size="11.5" fill="{MUTED}">Same passages for every model, 95% bootstrap interval. Higher is better. Every paired difference excludes zero.</text>']
 
 for (title, rep, key, (lo, hi), ticks, fmt, dfmt), x0 in zip(panels, PX):
     def sx(v): return x0 + (v - lo) / (hi - lo) * PW
@@ -53,7 +53,7 @@ ext = [
 ]
 o.append(f'<line x1="24" y1="348" x2="{W-24}" y2="348" stroke="{GRID}"/>')
 o.append(f'<text x="24" y="376" font-size="13" font-weight="600" fill="{INK}">Independent check: Dharmamitra arena, Sanskrit to English Elo</text>')
-o.append(f'<text x="24" y="394" font-size="11" fill="{MUTED}">Third-party head-to-head arena, 100 sentences, Gemini judge. Qwen3.5 (not 3.8) is the Qwen on that board. Pairs matched by size.</text>')
+o.append(f'<text x="24" y="394" font-size="11" fill="{MUTED}">Third-party head-to-head arena, Gemini judge. Qwen3.5 (not 3.8) is the Qwen on that board. Pairs matched by size.</text>')
 lo, hi, ax0, axw = 1000, 1450, 230, 440
 def ex(v): return ax0 + (v - lo) / (hi - lo) * axw
 for t in (1000, 1100, 1200, 1300, 1400):
