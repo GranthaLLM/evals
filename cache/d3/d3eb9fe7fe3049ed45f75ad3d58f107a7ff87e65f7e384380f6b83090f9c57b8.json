@@ -1,0 +1,1 @@
+{"text": "split each sanskrit word at its sandhi and compound junctions into its component words in unjoined devanagari, separated by ' + '. answer with the split only.\n\npurushashcha => purushah + cha\npadavishtitvabhavaditichenna => chet + na\npunastatrotthaya => punah + tatra + utthaya\nyavadasy => yavat + asya\ndhanamapi => dhanam + api\npratyekah =>"}

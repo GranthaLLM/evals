@@ -1,0 +1,1 @@
+{"text": "{\n  \"errors\": [\n    {\n      \"span\": \"Having bowed to Narayana\",\n      \"category\": \"accuracy\",\n      \"severity\": \"major\"\n    },\n    {\n      \"span\": \"and also to the revered Teacher\",\n      \"category\": \"addition\",\n      \"severity\": \"major\"\n    }\n  ]\n}"}

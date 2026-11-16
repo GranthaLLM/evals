@@ -1,0 +1,1 @@
+{"text": "{\n  \"errors\": [\n    {\n      \"span\": \"the meaning of the Aphorisms is expounded\",\n      \"category\": \"accuracy\",\n      \"severity\": \"major\"\n    },\n    {\n      \"span\": \"is bowed to in reverence, as also are the Preceptors\",\n      \"category\": \"omission\",\n      \"severity\": \"minor\"\n    }\n  ]\n}"}
