@@ -79,4 +79,4 @@ id = "buddhist-nlp/mitra-qwen35-translate"
 base_url = "http://localhost:8000/v1"
 key_env = "LOCAL_KEY"
 key_file = "~/.local_key"
-extra = { chat_template_kwargs = { enable_thinking = false } }
+extra = { chat_template_kwargs = { enable_thinking = false }, max_tokens = 200, stop = ["\n#", "# text ="] }
