@@ -1,0 +1,19 @@
+{
+ "model": "mitra-qwen-9b",
+ "per_work": 150,
+ "chrf++": 27.49,
+ "chrf": 29.21,
+ "signature": "nrefs:1|case:mixed|eff:yes|nc:6|nw:2|space:no|version:2.6.0",
+ "n": 1221,
+ "by_work": {
+  "kumarasambhava": 33.14,
+  "samkhyakarika": 30.66,
+  "sanatsujatiya": 17.43,
+  "sarvadarshanasamgraha": 26.17,
+  "shatakatraya": 29.85,
+  "tarkasamgraha": 32.66,
+  "vidura_niti": 23.76,
+  "vimshatika_trimshika": 25.26,
+  "yaksha_prashna": 22.89
+ }
+}

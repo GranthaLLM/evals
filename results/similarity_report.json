@@ -15,6 +15,13 @@
     0.7284,
     0.7392
    ]
+  },
+  "mitra-qwen-9b": {
+   "cosine": 0.7169,
+   "ci95": [
+    0.7111,
+    0.7228
+   ]
   }
  },
  "pairwise": {
@@ -23,6 +30,22 @@
    "ci95": [
     0.0069,
     0.0153
+   ],
+   "separable": true
+  },
+  "gemma-4-31b - mitra-qwen-9b": {
+   "diff": 0.0278,
+   "ci95": [
+    0.0225,
+    0.0328
+   ],
+   "separable": true
+  },
+  "mitra-qwen-9b - qwen3.8-27b": {
+   "diff": -0.0167,
+   "ci95": [
+    -0.0214,
+    -0.0115
    ],
    "separable": true
   }

@@ -14,6 +14,13 @@
     28.48,
     29.74
    ]
+  },
+  "mitra-qwen-9b": {
+   "chrf++": 27.49,
+   "ci95": [
+    26.83,
+    28.1
+   ]
   }
  },
  "pairwise": {
@@ -22,6 +29,22 @@
    "ci95": [
     0.76,
     1.43
+   ],
+   "separable": true
+  },
+  "gemma-4-31b - mitra-qwen-9b": {
+   "diff": 2.72,
+   "ci95": [
+    2.13,
+    3.3
+   ],
+   "separable": true
+  },
+  "mitra-qwen-9b - qwen3.8-27b": {
+   "diff": -1.63,
+   "ci95": [
+    -2.18,
+    -1.12
    ],
    "separable": true
   }
